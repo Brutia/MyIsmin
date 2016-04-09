@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>	
-	@include('common.nav')
+	
 	@include('common.head')
 	
 	<body>
-	
+		@include('common.nav')
+		@include('common.header')
 		@yield('content')
 	
 	</body>
