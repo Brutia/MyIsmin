@@ -5,7 +5,7 @@
 	
 	<body>
 		@include('common.nav')
-		@include('common.header')
+		@include('common.header', ['banner'=>$banner])
 		
 		<div class="container">
             <div class="row">

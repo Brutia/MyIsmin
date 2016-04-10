@@ -12,13 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['banner'=>null]);
 });
 
 Route::get('/formation', function(){
-	return view('formation');
+	return view('formation', ['banner'=>null]);
 });
 
 Route::get('/calendrier', function(){
-	return view('calendar');
+	return view('calendar', ['banner'=>null]);
 });
+
+Route::get('/articles/{article_name}', 'ArticleController@display');
+	

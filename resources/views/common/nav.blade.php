@@ -8,14 +8,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">TItre du site</a>
+            <a class="navbar-brand" href={{ URL::to('/')}}>TItre du site</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#">Accueil</a>
+                    <a href={{ URL::to('/')}}>Accueil</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Plannings <span class="caret"></span></a>
@@ -69,12 +69,10 @@
                  <li>
                     <a href="#">Innov'Action</a>
                 </li>
-                <!--<li>
-                    <a href="connect.php">Se connecter</a>
-                </li>-->
+                <li>
+                    <a href="/login">Se connecter</a>
+				</li>
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container -->
 </nav>
