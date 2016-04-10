@@ -20,7 +20,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Plannings <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Associations</a></li>
+                        <li><a href={{ URL::to('/calendrier') }}>Associations</a></li>
                         <li><a href="http://ismin.emse.fr/ismin/AffichePlanningMois.php?cycle=ismea&annee=1A">1A</a></li>
                         <li><a href="http://ismin.emse.fr/ismin/AffichePlanningMois.php?cycle=ismea&annee=2A">2A</a></li>
                         <li><a href="http://ismin.emse.fr/ismin/AffichePlanningMois.php?cycle=ismea&annee=3A">3A</a></li>
@@ -29,7 +29,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">La formation</a>
+                    <a href={{ URL::to('/formation') }}>La formation</a>
                 </li>
                 <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Visite guidée <span class="caret"></span></a>
@@ -46,7 +46,7 @@
                     </ul>
                     </li>-->
                 <li class="dropdown">
-<!--                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Associations <span class="caret"></span></a> -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Associations <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                     </ul>
                 </li>

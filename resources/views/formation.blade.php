@@ -10,8 +10,8 @@
 <div class="row">
 	<div class="col-sm-6">
 		<p class="text-justify">Informatique</p>
-		{{--<img style="width: 335px, height: 335px"
-			class="img-circle img-thumbnail" src="img/info.jpg" />--}}
+		<img style="width: 335px, height: 335px"
+			class="img-circle img-thumbnail" src="img/info.jpg" />
 	</div>
 	<div class="col-sm-6">
 		<p class="text-justify">Microélectronique</p>

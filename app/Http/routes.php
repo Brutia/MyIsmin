@@ -12,5 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('formation');
+    return view('welcome');
+});
+
+Route::get('/formation', function(){
+	return view('formation');
+});
+
+Route::get('/calendrier', function(){
+	return view('calendar');
 });
