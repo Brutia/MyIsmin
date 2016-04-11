@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Assos;
+use App\Clubs;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+    	$clubsNames = new Clubs();
+    	$clubsNames = $clubsNames->getClubsNames();
+    	$assosNames = new Assos();
+    	$assosNames = $assosNames->getAssos();
+    	view()->share('clubs', $clubsNames);
+    	view()->share('assos', $assosNames);
     }
 
     /**
