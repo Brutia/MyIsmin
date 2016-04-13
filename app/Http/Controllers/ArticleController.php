@@ -14,8 +14,12 @@ class ArticleController extends BaseController{
 	public function display($article_name){
 		$assosNames = new Assos();
 		$assosNames = $assosNames->getAssos();
-// 		dd($assosNames[0]->name);
 		$article = DB::table('articles')->where('name', $article_name)->first();
-		return view('article', ['content'=> $article->content, 'banner'=>null]);
+		if($article->image != null){
+			$banner = $article->image;
+		}else{
+			$banner = null;
+		}
+		return view('article', ['content'=> $article->content, 'banner'=>$banner, 'content_header'=>$article->name]);
 	}
 }

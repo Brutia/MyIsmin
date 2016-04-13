@@ -12,16 +12,20 @@
 */
 
 Route::get('/', function () {
-    return view('welcome', ['banner'=>null]);
+    return view('welcome', ['banner'=>null, 'content_header'=>'Le site des élèves Ismin']);
 });
 
 Route::get('/formation', function(){
-	return view('formation', ['banner'=>null]);
+	return view('formation', ['banner'=>null, 'content_header'=>'Formation ingénieur en 3 ans']);
 });
 
 Route::get('/calendrier', function(){
-	return view('calendar', ['banner'=>null]);
+	return view('calendar', ['banner'=>null, 'content_header'=>null]);
 });
 
 Route::get('/articles/{article_name}', 'ArticleController@display');
+
+Route::get('/eco-campus', function(){
+	return view('ecocampus', ['banner'=>null, 'content_header'=>'Campus provence, campus écolo!']);
+});
 	

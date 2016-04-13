@@ -9,7 +9,11 @@
                 <div class="site-heading">
                     <h1>My ISMIN</h1>
                     <hr class="small">
-                    <span class="subheading">The website all ISMIN must use !</span>
+                    @if ($content_header)
+                    	<span class="subheading">{{$content_header}}</span>
+                    @else
+                    	<span class="subheading">The website all ISMIN must use !</span>
+                    @endif
                 </div>
             </div>
         </div>

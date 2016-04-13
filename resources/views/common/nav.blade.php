@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href={{ URL::to('/')}}>TItre du site</a>
+            <a class="navbar-brand" href={{ URL::to('/')}}>Titre du site</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
