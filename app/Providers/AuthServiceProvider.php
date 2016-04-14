@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     {
 //         $this->registerPolicies($gate);
 		Auth::provider('ldap', function($app, array $config){
-			return new LdapAuthUserProvider($app['hash'], $config['model']);
+			return new LdapAuthUserProvider();
 		});
         //
     }

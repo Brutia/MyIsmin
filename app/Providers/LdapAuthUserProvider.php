@@ -2,16 +2,20 @@
 
 namespace App\Providers;
 
-use Illuminate\Auth\EloquentUserProvider;
+use Illuminate\Contracts\Auth\UserProvider as IlluminateUserProvider;
 use App\User;
 use Adldap\Laravel\Facades\Adldap;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 /**
  *
  * @author Guillaume
  *        
  */
-class LdapAuthUserProvider extends EloquentUserProvider {
+class LdapAuthUserProvider implements IlluminateUserProvider {
+	
+	
+	
 	
 /**
      * {@inheritdoc}
@@ -37,59 +41,47 @@ class LdapAuthUserProvider extends EloquentUserProvider {
 
     	if (Adldap::getProvider('default')->auth()->attempt($credentials["username"], $credentials["password"])) {
     		// Passed!
-    		dd('ok');
-    		return User::find(2);
+//     		dd('ok');
+			$temp = User::where('username','=',$credentials["username"])->select('username','name')->first();
+// 			dd($temp);
+// 			$temp= 'coucou';
+    		return $temp;
     	}
-//     	if ($this->getLoginFallback()) {
-    		//             // Login failed. If login fallback is enabled
-    		//             // we'll call the eloquent driver.
-    	return parent::retrieveByCredentials($credentials);
-//     	}
-//     	return User::find(2);
-    	 
-//         // Get the search query for users only.
-//         $query = $this->newAdldapUserQuery();
+    	dd('pas ici');
+//     	return parent::retrieveByCredentials($credentials);
+		return null;
 
-//         // Make sure the connection is bound
-//         // before we try to utilize it.
-//         if ($query->getConnection()->isBound()) {
-// //         	dd($credentials);
-// //             Get the username input attributes.
-//             $attributes = $this->getUsernameAttribute();
-// // 			dd($attributes);
-//             // Get the input key.
-//             $key = key($attributes);
-//             // Filter the query by the username attribute.
-// //             dd($attributes[$key]);
-//             $query->whereEquals($attributes[$key], $credentials[$key]);
-// // 			dd($query);
-//             // Retrieve the first user result.
-//             $user = $query->first();
-// 			dd($user);
-//             // If the user is an Adldap User model instance.
-//             if ($user instanceof User) {
-//                 // Retrieve the users login attribute.
-//                 $username = $user->{$this->getLoginAttribute()};
-
-//                 if (is_array($username)) {
-//                     // We'll make sure we retrieve the users first username
-//                     // attribute if it's contained in an array.
-//                     $username = Arr::get($username, 0);
-//                 }
-
-//                 // Get the password input array key.
-//                 $key = $this->getPasswordKey();
-
-//                 // Try to log the user in.
-//                 if ($this->authenticate($username, $credentials[$key])) {
-//                     // Login was successful, we'll create a new
-//                     // Laravel model with the Adldap user.
-//                     return $this->getModelFromAdldap($user, $credentials[$key]);
-//                 }
-//             }
-//         }
-
-//         
-//         }
+//    
+    }
+    
+    public function validateCredentials(Authenticatable $user, array $credentials)
+    {
+    	// TODO: Implement validateCredentials() method.
+    	// we'll assume if a user was retrieved, it's good
+    	return true;
+//     	dd('coucou');
+    	if($user->username == $credentials['username'] && $user->getAuthPassword() == bcrypt($credentials['password']))
+    	{
+    
+//     		$user->last_login_time = Carbon::now();
+// 			$user->name = 'test'
+//     		$user->save();
+    
+    		return true;
+    	}
+    	return false;
+    
+    
+    }
+    
+    /**
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  string  $token
+     * @return void
+     */
+    public function updateRememberToken(Authenticatable $user, $token)
+    {
+    	$user->remember_token = $token;
+    	$user->save();
     }
 }
