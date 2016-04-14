@@ -11,6 +11,11 @@ use App\Http\Requests\Request;
 
 class ArticleController extends BaseController{
 	
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	
 	public function display($article_name){
 		$assosNames = new Assos();
 		$assosNames = $assosNames->getAssos();
