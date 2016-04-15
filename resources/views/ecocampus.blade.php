@@ -1,4 +1,4 @@
-@extends('common.layout', ['banner'=>$banner, 'assos'=>$assos])
+@extends('common.layout')
 
 
 @section('content')

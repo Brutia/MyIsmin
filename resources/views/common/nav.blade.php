@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href={{ URL::to('/')}}>Titre du site</a>
+            <a class="navbar-brand" href={{ URL::to('/')}}>{{ trans('site_cst.site_name') }}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -49,7 +49,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Associations <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                     	@foreach($assos as $asso)
-                    		<li><a href= {{URL::to('/articles/'.$asso->name)}}>{{$asso->name}}</a></li>
+                    		<li><a href= {{URL::to('/article/'.$asso->name)}}>{{$asso->name}}</a></li>
                     	@endforeach
                     </ul>
                 </li>
@@ -57,7 +57,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Clubs <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                     	@foreach($clubs as $club)
-                    		<li><a href = {{URL::to('/articles/'.$club->name)}}>{{$club->name}}</a></li>
+                    		<li><a href = {{URL::to('/article/'.$club->name)}}>{{$club->name}}</a></li>
                     	@endforeach
                     </ul>
                 </li>
@@ -72,12 +72,18 @@
                         <li><a href="http://photos-ismin.tumblr.com/">Tumblr</a></li>
                     </ul>
                 </li>
-                 <li>
-                    <a href="#">Innov'Action</a>
-                </li>
-                <li>
-                    <a href="/login">Se connecter</a>
+<!--                 <li> -->
+<!--                     <a href="#">Innov'Action</a> -->
+<!--                 </li> -->
+				@if( Auth::user())
+				<li>
+					<a href={{URL::to('/logout') }}>Se déconnecter</a>
 				</li>
+				@else
+                <li>
+                    <a href={{URL::to('/login') }}>Se connecter</a>
+				</li>
+				@endif
             </ul>
         </div>
     </div>

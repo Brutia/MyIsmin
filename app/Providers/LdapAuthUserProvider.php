@@ -42,7 +42,7 @@ class LdapAuthUserProvider implements IlluminateUserProvider {
     	if (Adldap::getProvider('default')->auth()->attempt($credentials["username"], $credentials["password"])) {
     		// Passed!
 //     		dd('ok');
-			$user = User::where('username','=',$credentials["username"])->select('username','name')->first();
+			$user = User::where('username','=',$credentials["username"])->first();
 // 			dd($user);
 			if($user==null){
 				$user = new User();

@@ -23,7 +23,6 @@ Route::get('/calendrier', function(){
 	return view('calendar', ['banner'=>null, 'content_header'=>null]);
 });
 
-Route::get('/articles/{article_name}', 'ArticleController@display');
 
 Route::get('/eco-campus', function(){
 	return view('ecocampus', ['banner'=>null, 'content_header'=>'Campus provence, campus écolo!']);
@@ -38,3 +37,5 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/test', 'HomeController@test');
+
+Route::resource('article', 'ArticleController');
