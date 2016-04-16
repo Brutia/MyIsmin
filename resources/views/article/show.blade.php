@@ -4,13 +4,15 @@
 @section('content')
 
 @if( Auth::user())	
-	<button type="button" class="btn btn-default btn-lg">
-  		<a class="glyphicon glyphicon-pencil" aria-hidden="true" href={{URL::to('/article/'.$content_header.'/edit')}}></a>
-	</button>
+	
+	<a class="btn btn-default " aria-hidden="true" href={{URL::to('/article/'.$article_name.'/edit')}}>
+	<div class="glyphicon glyphicon-pencil">
+<!-- 		<button type="button" class=""></button> -->
+	</div></a>
 @endif
 
 <p class="text-justify">
-	{{$content}}
+	{!!$content!!}
 </p>
 
 @endsection

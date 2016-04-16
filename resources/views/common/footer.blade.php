@@ -25,7 +25,7 @@
 <script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
 
 <!-- <!-- Custom Theme JavaScript --> 
-<script src="{{ URL::asset('assets/js/clean-blog.min.js') }}"></script>
+{{-- <script src="{{ URL::asset('assets/js/clean-blog.min.js') }}"></script> --}}
 
 <script src="{{ URL::asset('assets/js/moment.min.js') }}"></script>
 

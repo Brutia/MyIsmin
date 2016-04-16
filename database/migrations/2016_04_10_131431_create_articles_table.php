@@ -18,6 +18,7 @@ class CreateArticlesTable extends Migration
             $table->string('image');
             $table->string('content');
             $table->string('name')->unique();
+            $table->string('header_text');
         });
     }
 
