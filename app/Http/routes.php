@@ -35,3 +35,5 @@ Route::get('/admin', function(){
 Route::auth();
 
 Route::resource('article', 'ArticleController');
+
+Route::get('/calendar/event', 'EventController@index');

@@ -12,7 +12,7 @@ document.onreadystatechange = function () {
     $.ajax({
         'async': false,
         'global': false,
-        'url': "/auth/calendrier/events",
+        'url': "{{URL::to("/calendar/event")}}",
         'dataType': "json",
         'success': function (data) {
             $.each(data,function(i, e){
