@@ -24,5 +24,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     
+    /**
+     * Get all of the tasks for the user.
+     */
+    public function events()
+    {
+    	return $this->hasMany(Evenement::class);
+    }
+    
     
 }

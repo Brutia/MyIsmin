@@ -1,7 +1,4 @@
-@extends('common.layout')
-
-
-@section('content')
+@extends('common.layout') @section('content')
 
 <script>
 var test;
@@ -28,7 +25,9 @@ document.onreadystatechange = function () {
     $('#calendar').fullCalendar({
         lang: 'fr',
         eventLimit: true, // allow "more" link when too many events
-        events: retour
+        events: retour,
+        defaultView: 'agendaWeek',
+        
     });
 };
 

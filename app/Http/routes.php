@@ -36,4 +36,6 @@ Route::auth();
 
 Route::resource('article', 'ArticleController');
 
-Route::get('/calendar/event', 'EventController@index');
+Route::resource('event', 'EventController');
+
+Route::get('/calendar/event', 'EventController@getall');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Evenement;
+use Auth;
 
 class EventController extends Controller
 {
@@ -16,8 +17,14 @@ class EventController extends Controller
      */
     public function index()
     {
+    	$events = Evenement::where('start','>',(new \DateTime()))->get();
+//     	dd($events[0]->);
+    	return view('evenements.index', ['events'=>$events]);
+    }
+    
+    public function getall(){
     	$events = Evenement::all();
-        return $events->toJson();
+    	return $events->toJson();
     }
 
     /**
@@ -27,7 +34,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view('evenements.add');
     }
 
     /**
@@ -38,7 +45,16 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    	$user = Auth::user();
+    	$event = new Evenement();
+    	$event->title= $request->input('title');
+    	$event->start = \DateTime::createFromFormat('d/m/Y H:i',$request->input('start'));
+    	$event->end = \DateTime::createFromFormat('d/m/Y H:i',$request->input('end'));
+    	$event->description = $request->input('description');
+    	$event->lieu = $request->input('lieu');
+    			
+    	$user->events()->save($event);
+    	return redirect()->action('ArticleController@show',['m-gate']);
     }
 
     /**
@@ -49,7 +65,7 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+    	
     }
 
     /**
@@ -60,7 +76,15 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+    	$event = Evenement::find($id);
+//     	dd($event->start);
+    	return view('evenements.edit',["id"=>$event->id,
+    			"title"=>$event->title,
+    			"lieu"=>$event->lieu,
+    			"start"=>(new \DateTime($event->start))->format("d/m/Y H:i"),
+    			"end"=>(new \DateTime($event->end))->format("d/m/Y H:i"),
+    			"desc"=>$event->description,
+    	]);
     }
 
     /**
@@ -72,7 +96,14 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    	$event = Evenement::find($id);
+    	$event->title= $request->input('title');
+    	$event->start = \DateTime::createFromFormat('d/m/Y H:i',$request->input('start'));
+    	$event->end = \DateTime::createFromFormat('d/m/Y H:i',$request->input('end'));
+    	$event->description = $request->input('description');
+    	$event->lieu = $request->input('lieu');
+    	$event->save();
+    	return redirect('/event');
     }
 
     /**
@@ -83,6 +114,8 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Evenement::find($id);
+        $event->delete();
+        return redirect('/event');
     }
 }

@@ -16,7 +16,7 @@ class CreateArticlesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('image');
-            $table->string('content');
+            $table->longText('content');
             $table->string('name')->unique();
             $table->string('header_text');
         });
