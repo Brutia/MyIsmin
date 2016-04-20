@@ -12,7 +12,8 @@ class ArticleController extends Controller {
 	private $acceptFile = [ 
 			'jpg',
 			'jpeg',
-			'png' 
+			'png',
+			'JPG'
 	];
 	/**
 	 * Display a listing of the resource.
@@ -112,7 +113,7 @@ class ArticleController extends Controller {
 		
 		$article->content = $request->input ( 'contenu' );
 		if ($request->hasFile ( 'header_image' )) {
-			if (in_array ( $request->file ( 'header_image' )->getExtension (), $this->acceptFile )) {
+			if (in_array ( $request->file ( 'header_image' )->getClientOriginalExtension(), $this->acceptFile ) && strpos($request->file('header_image')->getClientOriginalName(),"php") === false) {
 				$request->file ( 'header_image' )->move ( 'assets/img/', $request->file ( 'header_image' )->getClientOriginalName () );
 				// $image=;
 				$article->image = 'assets/img/' . $request->file ( 'header_image' )->getClientOriginalName ();
