@@ -27,6 +27,15 @@ tinymce.init({
 
 <div class="container">
 	<div class="row">
+		@if($errors[0])
+			<div class="alert alert-danger col-md-9 go-right" role="alert">
+				@foreach($errors as $error)
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only">Error:</span> {{$error}}
+				@endforeach
+			</div>
+		
+		@endif
 	
 		<form role="form" class="col-md-9 go-right" method="post"
 			action={{URL::to('/article/'.$article_name) }} enctype="multipart/form-data">
