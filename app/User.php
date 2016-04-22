@@ -1,18 +1,19 @@
 <?php
 
 namespace App;
-
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+	use EntrustUserTrait;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'password',
+        'name', 'username'
     ];
 
     /**
@@ -31,6 +32,11 @@ class User extends Authenticatable
     {
     	return $this->hasMany(Evenement::class);
     }
+    
+//     public function roles()
+//     {
+//     	return $this->belongsToMany('Role','assigned_roles');
+//     }
     
     
 }

@@ -41,13 +41,13 @@ class LdapAuthUserProvider implements IlluminateUserProvider {
 
     	if (Adldap::getProvider('default')->auth()->attempt($credentials["username"], $credentials["password"])) {
     		// Passed!
-//     		dd('ok');
 			$user = User::where('username','=',$credentials["username"])->first();
-// 			dd($user);
 			if($user==null){
+				$role = Role::find(3);
 				$user = new User();
 				$user->username = $credentials["username"];
 				$user->name = $credentials["username"];
+				$user->attachRole($role);
 				$user->save();
 			}
     		return $user;

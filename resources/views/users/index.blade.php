@@ -21,10 +21,10 @@
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col col-xs-6">
-							<h3 class="panel-title">Evenements à venir</h3>
+							<h3 class="panel-title">Liste des utilisateurs</h3>
 						</div>
 						<div class="col col-xs-6 text-right">
-							<a href={{URL::to('event/create')}}><button type="button" class="btn btn-sm btn-primary btn-create"> Créer un évènement</button></a>
+							<a href={{URL::to('/admin/user/create')}}><button type="button" class="btn btn-sm btn-primary btn-create"> Créer un utilisateur</button></a>
 						</div>
 					</div>
 				</div>
@@ -34,25 +34,22 @@
 							<tr>
 								<th><em class="fa fa-cog"></em></th>
 								<th class="hidden-xs">ID</th>
-								<th>Titre</th>
-								<th>Description</th>
-								<th>Lieu</th>
-								<th>Début</th>
-								<th>Fin</th>
-								<th>Créé par:</th>
+								<th>Nom</th>
+								<th>username</th>
+								<th>Role</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($events as $event)
+							@foreach($users as $user)
 								<tr>
 									<td>
 										<div class="row">
 											<div class="col-md-10">
 												<div class="col-md-5">
-													<a href="{{URL::to('/admin/event/'.$event->id.'/edit')}}" class="btn btn-default"><em class="fa fa-pencil"></em></a> 
+													<a href="{{URL::to('/admin/user/'.$user->id.'/edit')}}" class="btn btn-default"><em class="fa fa-pencil"></em></a> 
 												</div>
 												<div class="col-md-5 col-md-offset-1">
-													<form method="post" class="" action="{{URL::to('/admin/event/'.$event->id)}}" >
+													<form method="post" class="" action="{{URL::to('/admin/user/'.$user->id)}}" >
 														<div class="">
 														<input type="hidden" name="_method" value="DELETE">
 														{!! csrf_field() !!}
@@ -63,13 +60,16 @@
 											</div>
 										</div>
 									</td>
-									<td class="hidden-xs">{{$event->id}}</td>
-									<td>{{$event->title}}</td>
-									<td>{{$event->description}}</td>
-									<td>{{$event->lieu}}</td>
-									<td>{{$event->start}}</td>
-									<td>{{$event->end}}</td>
-									<td>{{$event->user->username}}</td>
+									<td class="hidden-xs">{{$user->id}}</td>
+									<td>{{$user->name}}</td>
+									<td>{{$user->username}}</td>
+									<td>
+										<ul>
+											@foreach($user->roles as $role)
+												<li>{{$role->name}}</li>
+											@endforeach
+										</ul>
+									</td>
 								</tr>
 							@endforeach
 						</tbody>
