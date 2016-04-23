@@ -1,4 +1,11 @@
-@extends('common.layout') @section('content')
+@extends('common.layout') 
+
+@section('title')
+Calendrier
+@endsection
+
+
+@section('content')
 
 <script type="text/javascript" src="{{URL::to('assets/js/dateformat.js')}}"></script>
 <script>

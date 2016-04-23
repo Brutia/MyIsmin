@@ -46,6 +46,11 @@ tinymce.init({
 					<input name="header_image" type="file">
 				</span>
 			</div>
+			<div class="form-group">
+				<label for="header">Texte de la bannière:</label>
+				<input name="header" class="form-control" value="{{$content_header}}">
+			
+			</div>
 
 			<div class="form-group">
 				<label for="contenu">Texte de l'article:</label>

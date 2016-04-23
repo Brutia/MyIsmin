@@ -112,6 +112,7 @@ class ArticleController extends Controller {
 		$article = Article::where ( 'name', $article_name )->first ();
 		
 		$article->content = $request->input ( 'contenu' );
+		$article->header_text = $request->input('header');
 		if ($request->hasFile ( 'header_image' )) {
 			if (in_array ( $request->file ( 'header_image' )->getClientOriginalExtension(), $this->acceptFile ) && strpos($request->file('header_image')->getClientOriginalName(),"php") === false) {
 				$request->file ( 'header_image' )->move ( 'assets/img/', $request->file ( 'header_image' )->getClientOriginalName () );

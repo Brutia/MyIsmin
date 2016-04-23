@@ -1,5 +1,7 @@
 @extends('common.layout') 
-
+@section('title')
+MyIsmin
+@endsection
 
 @section('content')
 <div class="home">

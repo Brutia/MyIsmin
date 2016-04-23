@@ -24,7 +24,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('roles')->get();
-//         dd($temp[0]->name);
         return view('users.index',['users'=>$users]);
     }
 
@@ -92,20 +91,11 @@ class UserController extends Controller
     	foreach($roles as $role){
     		$temp = Role::find($role);
     		$user->detachRole($temp);
-    		$user->save();
     	}
     	foreach($request->input('role') as $role){
     		$temp = Role::find($role);
     		$user->attachRole($temp);
-    		$user->save();
     	}
-// 		foreach($user->roles as $role){
-// 			$roles[] = $role->id;
-// 		}
-// 		$roles = array_merge($roles, $request->input('role'));
-// 		foreach($roles as $role){
-// 			if
-// 		}
     	return redirect()->action('UserController@index');
     }
 

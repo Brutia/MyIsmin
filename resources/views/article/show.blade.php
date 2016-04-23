@@ -1,15 +1,18 @@
 @extends('common.layout')
 
+@section('title')
+{{$article_name}}
+@endsection
 
 @section('content')
 
-@if( Auth::user())	
-	
-	<a class="btn btn-default " aria-hidden="true" href={{URL::to('/article/'.$article_name.'/edit')}}>
-	<div class="glyphicon glyphicon-pencil">
-<!-- 		<button type="button" class=""></button> -->
-	</div></a>
-@endif
+@role('admin','prez')	
+	<div class="col-md-2 col-md-offset-10">
+		<a class="btn btn-default " aria-hidden="true" href={{URL::to('/article/'.$article_name.'/edit')}} title="Editer l'article">
+			<div class="glyphicon glyphicon-pencil"></div>
+		</a>
+	</div>
+@endrole
 
 <p class="text-justify">
 	{!!$content!!}

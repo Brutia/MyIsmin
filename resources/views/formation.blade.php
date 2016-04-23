@@ -1,5 +1,8 @@
 @extends('common.layout')
 
+@section('title')
+La formation
+@endsection
 
 @section('content')
 

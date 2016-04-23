@@ -1,5 +1,8 @@
 @extends('common.layout')
 
+@section('title')
+Eco-campus
+@endsection
 
 @section('content')
 	<div class="row">
