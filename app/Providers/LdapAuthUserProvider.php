@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\UserProvider as IlluminateUserProvider;
 use App\User;
 use Adldap\Laravel\Facades\Adldap;
 use Illuminate\Contracts\Auth\Authenticatable;
+use App\Role;
 
 /**
  *
