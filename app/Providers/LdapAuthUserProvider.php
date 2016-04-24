@@ -48,8 +48,9 @@ class LdapAuthUserProvider implements IlluminateUserProvider {
 				$user = new User();
 				$user->username = $credentials["username"];
 				$user->name = $credentials["username"];
-				$user->attachRole($role);
+
 				$user->save();
+				$user->attachRole($role);
 			}
     		return $user;
     	}

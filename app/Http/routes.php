@@ -57,6 +57,16 @@ Route::group ( [
 ], function () {
 	Route::resource ( 'event', 'EventController' );
 	Route::resource ( 'user', 'UserController' );
+	Route::resource ( 'article', 'ArticleController', [
+			'except' => [
+					'create',
+					'store',
+					'destroy',
+					'show',
+					'edit',
+					'update'
+			]
+	] );
 } );
 
 

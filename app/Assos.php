@@ -26,7 +26,9 @@ class Assos extends Model
 	
 	public function getAssos(){
 // 		$assos = [];
-		return DB::table('assos')->select('name')->get();
+
+		
+		return DB::table('assos')->select('lien','name')->get();
 	}
 	
 }

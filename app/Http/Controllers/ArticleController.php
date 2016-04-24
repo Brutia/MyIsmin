@@ -21,7 +21,9 @@ class ArticleController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		//
+		$articles = Article::all();
+		
+		return view('article.admin.index',['articles'=>$articles]);
 	}
 	
 	/**
@@ -51,6 +53,9 @@ class ArticleController extends Controller {
 	 */
 	public function show($article_name) {
 		$article = DB::table ( 'articles' )->where ( 'name', $article_name )->first ();
+		if($article == null){
+			return view('errors.503');
+		}
 		if ($article->image != null) {
 			$banner = $article->image;
 		} else {
