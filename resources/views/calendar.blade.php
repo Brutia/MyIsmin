@@ -26,12 +26,11 @@ document.onreadystatechange = function () {
                     start: e.start,
                     end  : e.end,
                     description: e.description,
-                    lieu: e.lieu
+                    lieu: e.lieu.name
                 });
             });
         }
     });
-    console.log(retour);
     $('#calendar').fullCalendar({
         lang: 'fr',
         eventLimit: true, // allow "more" link when too many events

@@ -27,11 +27,12 @@ tinymce.init({
 
 <div class="container">
 	<div class="row">
-		@if($errors[0])
+		@if(count($errors))
 			<div class="alert alert-danger col-md-9 go-right" role="alert">
 				@foreach($errors as $error)
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Error:</span> {{$error}}
+				</br>
 				@endforeach
 			</div>
 		

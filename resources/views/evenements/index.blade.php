@@ -24,7 +24,7 @@
 							<h3 class="panel-title">Evenements à venir</h3>
 						</div>
 						<div class="col col-xs-6 text-right">
-							<a href={{URL::to('event/create')}}><button type="button" class="btn btn-sm btn-primary btn-create"> Créer un évènement</button></a>
+							<a href={{URL::to('admin/event/create')}}><button type="button" class="btn btn-sm btn-primary btn-create"> Créer un évènement</button></a>
 						</div>
 					</div>
 				</div>
@@ -66,7 +66,7 @@
 									<td class="hidden-xs">{{$event->id}}</td>
 									<td>{{$event->title}}</td>
 									<td>{{$event->description}}</td>
-									<td>{{$event->lieu}}</td>
+									<td>{{$event->lieu->name}}</td>
 									<td>{{$event->start}}</td>
 									<td>{{$event->end}}</td>
 									<td>{{$event->user->username}}</td>

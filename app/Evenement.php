@@ -13,4 +13,8 @@ class Evenement extends Model
 	public function user(){
 		return $this->belongsTo('App\User');
 	}
+	
+	public function lieu(){
+		return $this->belongsTo('App\Lieu');
+	}
 }
