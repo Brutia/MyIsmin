@@ -2,6 +2,8 @@
 
 <link rel="stylesheet" type="text/css" href={{URL::asset('assets/css/form.css')}}>
 
+<script type="text/javascript"
+	src="{{URL::asset('assets/js/jquery.js')}}"></script>
 <script src={{URL::asset('assets/js/tinymce/js/tinymce/tinymce.min.js')}}></script>
 
 <script type="text/javascript">
@@ -22,12 +24,43 @@ tinymce.init({
   language: "fr_FR",
   relative_urls: false,	
 });
+
+
+function bs_input_file() {
+    $(".input-file").before(
+        function() {
+            if ( ! $(this).prev().hasClass('input-ghost') ) {
+                var element = $("<input type='file' class='input-ghost' style='visibility:hidden; height:0'>");
+                element.attr("name",$(this).attr("name"));
+                element.change(function(){
+                    element.next(element).find('input').val((element.val()).split('\\').pop());
+                });
+                $(this).find("button.btn-choose").click(function(){
+                    element.click();
+                });
+                $(this).find("button.btn-reset").click(function(){
+                    element.val(null);
+                    $(this).parents(".input-file").find('input').val('');
+                });
+                $(this).find('input').css("cursor","pointer");
+                $(this).find('input').mousedown(function() {
+                    $(this).parents('.input-file').prev().click();
+                    return false;
+                });
+                return element;
+            }
+        }
+    );
+}
+$(function() {
+    bs_input_file();
+});
 </script>
 @section('content')
 
 <div class="container">
 	<div class="row">
-		@if(count($errors))
+		@if($errors[0])
 			<div class="alert alert-danger col-md-9 go-right" role="alert">
 				@foreach($errors as $error)
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -43,9 +76,15 @@ tinymce.init({
 			<input type="hidden" name="_method" value="PUT">
 			{!! csrf_field() !!}
 			<div class="form-group">
-				<span class="btn btn-default btn-file"> Choisir une image d'en-tête
-					<input name="header_image" type="file">
-				</span>
+		        <div class="input-group input-file" name="Fichier1">
+		            <span class="input-group-btn">
+		                <button class="btn btn-default btn-choose" type="button">Choose</button>
+		            </span>
+		            <input type="text" class="form-control" placeholder='Choose a file...' />
+		            <span class="input-group-btn">
+		                 <button class="btn btn-warning btn-reset" type="button">Reset</button>
+		            </span>
+		        </div>
 			</div>
 			<div class="form-group">
 				<label for="header">Texte de la bannière:</label>

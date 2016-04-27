@@ -62,12 +62,12 @@ class EventController extends Controller {
 		if(Evenement::where ( 'start', '<', $event->start )
 				->where('end', '>', $event->start)
 				->where('lieu_id','=',$lieu->id)
-				->get () != null) {
+				->first() != null) {
 			$errors[] = "Un évènement est déjà prévu à la ".$lieu->name." sur ce créneau";										
 		}
 		// Todo : renvoyer vers l'autre methode du controlleur
 		if (count ( $errors )) {
-			return view ( 'evenements.create', [ 
+			return view ( 'evenements.add', [ 
 					"id" => $event->id,
 					"title" => $event->title,
 					"lieus"=>$lieus,
