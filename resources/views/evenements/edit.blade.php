@@ -9,7 +9,7 @@
 				<h2>Editer l'évènement</h2>
 				@if(count($errors))
 				<div class="row">
-				<div class="alert alert-danger col-md-9 go-right" role="alert">
+				<div class="alert alert-danger col-md-12 go-right" role="alert">
 					@foreach($errors as $error) <span
 						class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 					<span class="sr-only">Error:</span> {{$error}} 
@@ -35,20 +35,27 @@
 					<label for="lieu">Lieu</label> <select class="form-control"
 						id="lieu" name="lieu">
 						@foreach($lieus as $lieu)
-							<option value={{$lieu->id}}>{{$lieu->name}}</option>
+							<option value={{$lieu->id}} @if($lieu_s == $lieu->id) selected @endif >{{$lieu->name}}</option>
 						@endforeach
 					</select>
 				</div>
 				<div class="form-group">
 
-					<label for="start">Debut</label> <input name="start"
-						class="form-control" id='datetimepicker' value={{$start}}
-						type="text" required>
+					<div class="row">
+						<div class='col-sm-12'>
+							<label for="start">Debut</label> <input name="start"
+								class="form-control" id='datetimepicker' value={{$start}} type="text" required>
+						</div>
+					</div>
 				</div>
 				<div class="form-group">
 
-					<label for="end">Fin</label> <input name="end" class="form-control"
-						id='datetimepicker1' value={{$end}} type="text" required>
+					<div class="row">
+						<div class='col-sm-12'>
+							<label for="end">Fin</label> <input name="end" class="form-control"
+								id='datetimepicker1' value={{$end}} type="text" required>
+						</div>
+					</div>
 				</div>
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-primary">Enregistrer</button>

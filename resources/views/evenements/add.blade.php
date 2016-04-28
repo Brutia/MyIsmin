@@ -1,43 +1,45 @@
-@extends('layouts.app') 
-
-@section('content')
+@extends('layouts.app') @section('content')
 <div class="container">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<form role="form" class="col-md-12 go-right" method="post"
 				action="{{URL::to('/admin/event')}}">
-				{!! csrf_field() !!}
+				{!! csrf_field()!!}
 				<h2>Ajout d'un évènement</h2>
 				@if(count($errors))
-					<div class="alert alert-danger col-md-9 go-right" role="alert">
-						@foreach($errors as $error)
-						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span> {{$error}}
-						</br>
-						@endforeach
+					<div class="row">
+						<div class="alert alert-danger col-md-12 go-right" role="alert">
+							@foreach($errors as $error) <span
+								class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span class="sr-only">Error:</span> {{$error}} 
+							</br>
+							@endforeach
+						</div>
 					</div>
-				
+
 				@endif
+				</br>
 				<div class="form-group">
 					<label for="title">Nom de l'évènement</label> <input name="title"
-						type="text" class="form-control" required>
+						type="text" class="form-control" value="{{$title}}" required>
 
 				</div>
 				<div class="form-group">
 
 					<label for="description">Description</label>
-					<textarea name="description" class="form-control" required></textarea>
+					<textarea name="description" class="form-control" required>{{$desc}}</textarea>
 				</div>
 				<div class="form-group">
 
 					<label for="lieu">Lieu</label> <select class="form-control"
 						id="lieu" name="lieu">
 						@foreach($lieus as $lieu)
-							<option value={{$lieu->id}}>{{$lieu->name}}</option>
+							<option value={{$lieu->id}} @if($lieu_s == $lieu->id) selected @endif > {{$lieu->name}}</option>
 						@endforeach
 					</select>
 				</div>
 				<div class="form-group">
+
 					<div class="row">
 						<div class='col-sm-12'>
 							<label for="start">Debut</label> <input name="start"
@@ -46,6 +48,7 @@
 					</div>
 				</div>
 				<div class="form-group">
+
 					<div class="row">
 						<div class='col-sm-12'>
 							<label for="end">Fin</label> <input name="end" class="form-control"
@@ -81,16 +84,16 @@
 <script src="{{URL::asset('assets/js/jquery-ui.min.js')}}"></script>
 
 
-<script type="text/javascript">
-$(function () {
-    $('#datetimepicker').datetimepicker({
-    	locale:'fr'
-    });
-});
-$(function () {
-    $('#datetimepicker1').datetimepicker({
-    	locale:'fr'
-    });
-});
 
+<script type="text/javascript">
+		$(function () {
+            $('#datetimepicker').datetimepicker({
+            	locale:'fr'
+            });
+        });
+		$(function () {
+	        $('#datetimepicker1').datetimepicker({
+            	locale:'fr'
+            });
+	    });
 </script>

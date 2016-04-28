@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Evenement;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use App\Lieu;
 
 class EventController extends Controller {
@@ -31,11 +32,17 @@ class EventController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create() {
+	public function create(Request $request) {
 		$lieus = Lieu::all ();
+// 		dd($request->session ()->pull ( 'error', ''));
 		return view ( 'evenements.add', [ 
 				'lieus' => $lieus,
-				"errors" => [ ] 
+				"title" => $request->session ()->pull ( 'title', ' '),
+				"lieu_s" => $request->session ()->pull ( 'lieu_s', ' '),
+				"start" => "",
+				"end" => "",
+				"desc" => $request->session ()->pull ( 'desc', ''),
+				"errors" => $request->session ()->pull ( 'error', [])
 		] );
 	}
 	
@@ -46,8 +53,7 @@ class EventController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
-		$errors = [ ];
-		$lieus = Lieu::all ();
+		$errors =[];
 		$user = Auth::user ();
 		$event = new Evenement ();
 		$event->title = $request->input ( 'title' );
@@ -57,28 +63,27 @@ class EventController extends Controller {
 
 		$lieu = Lieu::find ( $request->input ( 'lieu' ) );
 		if ($event->start > $event->end) {
-			$errors [] = "La date de début doit être avant la date de fin";
+
+// 			$request->session ()->flash ( 'error', 'La date de début doit être avant la date de fin' );
+			$errors[] = 'La date de début doit être avant la date de fin';
 		}
-		if(Evenement::where ( 'start', '<', $event->start )
-				->where('end', '>', $event->start)
-				->where('lieu_id','=',$lieu->id)
-				->first() != null) {
-			$errors[] = "Un évènement est déjà prévu à la ".$lieu->name." sur ce créneau";										
-		}
-		// Todo : renvoyer vers l'autre methode du controlleur
-		if (count ( $errors )) {
-			return view ( 'evenements.add', [ 
-					"id" => $event->id,
-					"title" => $event->title,
-					"lieus"=>$lieus,
-					"lieu_s" => $event->lieu,
-					"start" => "",
-					"end" => "",
-					"desc" => $event->description,
-					"errors" => $errors 
-			] );
+		if(DB::table('evenements')
+				->where([['start', '<', $event->start],['end', '>', $event->start],['lieu_id','=',$lieu->id]])
+				->orwhere([['start', '<', $event->end],['end', '>', $event->end],['lieu_id','=',$lieu->id]])
+				->first() != null) {		
+
+// 			$request->session ()->flash ( 'error',"Un évènement est déjà prévu à la ".$lieu->name." sur ce créneau" );
+			$errors[] = "Un évènement est déjà prévu à la ".$lieu->name." sur ce créneau" ;
 		}
 		
+		if (count ( $errors )) {
+			$request->session ()->flash ( 'title',$event->title);
+				
+			$request->session ()->flash ( 'lieu_s',$request->input ( 'lieu' ));
+			$request->session ()->flash ( 'desc',$event->description);
+			$request->session ()->flash ( 'error', $errors);
+			return redirect()->action('EventController@create');
+		} 
 		$event->lieu ()->associate ( $lieu );
 		$user->events ()->save ( $event );
 		return redirect ()->action ( 'EventController@index' );
@@ -99,10 +104,27 @@ class EventController extends Controller {
 	 * @param int $id        	
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit($id) {
+	public function edit(Request $request ,$id) {
 		$event = Evenement::find ( $id );
 		$lieus = Lieu::all ();
-		// dd($event->start);
+		$errors = $request->session ()->pull ( 'error', []);
+		if($errors != []){
+			return view( 'evenements.edit', [
+					"id" => $event->id,
+					"title" => $event->title,
+					"lieus" => $lieus,
+					"lieu_s" => $event->lieu->id,
+					"start" => "",
+					"end" => "",
+					"desc" => $event->description,
+					"errors" => $errors
+				]
+					
+					
+					
+			);
+		}
+		
 		return view ( 'evenements.edit', [ 
 				"id" => $event->id,
 				"title" => $event->title,
@@ -110,7 +132,8 @@ class EventController extends Controller {
 				"lieu_s" => $event->lieu->id,
 				"start" => (new \DateTime ( $event->start ))->format ( "d/m/Y H:i" ),
 				"end" => (new \DateTime ( $event->end ))->format ( "d/m/Y H:i" ),
-				"desc" => $event->description 
+				"desc" => $event->description,
+				"errors" => []
 		] );
 	}
 	
@@ -133,24 +156,27 @@ class EventController extends Controller {
 		if ($event->start > $event->end) {
 			$errors [] = "La date de début doit être avant la date de fin";
 		}
-		if(Evenement::where ( 'start', '<', $event->start )
-				->where('end', '>', $event->start)
-				->where('lieu_id','=',$lieu->id)
-				->get () != null) {
-					$errors[] = "Un évènement est déjà prévu à la ".$lieu->name." sur ce créneau";
+		
+		if(DB::table('evenements')
+			->where([['start', '<', $event->start],['end', '>', $event->start],['lieu_id','=',$lieu->id]])
+			->orwhere([['start', '<', $event->end],['end', '>', $event->end],['lieu_id','=',$lieu->id]])
+			->first() != null) {
+	
+				// 			$request->session ()->flash ( 'error',"Un évènement est déjà prévu à la ".$lieu->name." sur ce créneau" );
+				$errors[] = "Un évènement est déjà prévu à la ".$lieu->name." sur ce créneau" ;
+			}
+	
+		if (count ( $errors )) {
+			$request->session ()->flash ( 'title',$event->title);
+				
+			$request->session ()->flash ( 'lieu_s',$request->input ( 'lieu' ));
+			$request->session ()->flash ( 'desc',$event->description);
+			$request->session ()->flash ( 'error', $errors);
+			return redirect()->action('EventController@edit', ["id"=>$id]);
 		}
 		
-		if (count ( $errors )) {
-			return view ( 'evenements.edit', [ 
-					"id" => $event->id,
-					"title" => $event->title,
-					"lieu" => $event->lieu,
-					"start" => "",
-					"end" => "",
-					"desc" => $event->description,
-					"errors" => $errors 
-			] );
-		}
+		
+		
 
 		$event->lieu ()->associate ( $lieu );
 		$event->save ();
