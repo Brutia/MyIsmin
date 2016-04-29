@@ -7,7 +7,7 @@ Calendrier
 
 @section('content')
 
-<script type="text/javascript" src="{{URL::to('assets/js/dateformat.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('assets/js/dateformat.js')}}"></script>
 <script>
 var test;
 document.onreadystatechange = function () {
