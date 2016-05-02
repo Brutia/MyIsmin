@@ -11,28 +11,28 @@
  * |
  */
 Route::get ( '/', function () {
-	return view ( 'welcome', [ 
+	return view ( 'pages.welcome', [ 
 			'banner' => null,
 			'content_header' => 'Le site des élèves Ismin' 
 	] );
 } );
 
 Route::get ( '/formation', function () {
-	return view ( 'formation', [ 
+	return view ( 'pages.formation', [ 
 			'banner' => null,
 			'content_header' => 'Formation ingénieur en 3 ans' 
 	] );
 } );
 
 Route::get ( '/calendrier', function () {
-	return view ( 'calendar', [ 
+	return view ( 'pages.calendar', [ 
 			'banner' => null,
 			'content_header' => null 
 	] );
 } );
 
 Route::get ( '/eco-campus', function () {
-	return view ( 'ecocampus', [ 
+	return view ( 'pages.ecocampus', [ 
 			'banner' => null,
 			'content_header' => 'Campus provence, campus écolo!' 
 	] );

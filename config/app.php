@@ -162,6 +162,7 @@ return [
         App\Providers\RouteServiceProvider::class,
     	GrahamCampbell\Exceptions\ExceptionsServiceProvider::class,
     	Zizaco\Entrust\EntrustServiceProvider::class,
+    	App\Providers\ComposerServiceProvider::class,
 
     ],
 
