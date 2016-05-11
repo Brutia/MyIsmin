@@ -87,8 +87,11 @@ class ArticleController extends Controller {
 		$article = DB::table ( 'articles' )->where ( 'name', $article_name )->first ();
 		if ($article->image != null) {
 			$banner = $article->image;
+			$file = explode("/",$banner);
+			$file = $file[count($file)-1];
 		} else {
 			$banner = null;
+			$file = null;
 		}
 		
 		if ($article->header_text != null) {
@@ -96,12 +99,12 @@ class ArticleController extends Controller {
 		} else {
 			$content_header = null;
 		}
-		
 		return view ( 'article.edit', [ 
 				'content' => $article->content,
 				"banner" => $banner,
 				"content_header" => $content_header,
 				"article_name" => $article_name,
+				"file" => $file,
 				"errors" => $errors 
 		] );
 	}
@@ -130,6 +133,9 @@ class ArticleController extends Controller {
 						$article_name 
 				] );
 			}
+		}
+		if(!$request->input('old_file') && !$request->hasFile ( 'header_image' )){
+			$article->image = "";
 		}
 		$article->save ();
 		

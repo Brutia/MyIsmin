@@ -7585,3 +7585,10 @@ button.close {
 
 .fa-medium:before {
   content: ""; }
+  
+.btn-choose {
+    padding: 7px 25px !important;
+}
+.btn-reset{
+    padding: 7px 25px !important;
+}

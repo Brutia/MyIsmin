@@ -39,8 +39,10 @@ function bs_input_file() {
                     element.click();
                 });
                 $(this).find("button.btn-reset").click(function(){
-                    element.val(null);
-                    $(this).parents(".input-file").find('input').val('');
+//                     element.val(null);
+//                     $(this).parents(".input-file").find('input').val('');
+					$("#old-file").remove();
+					$("#file-show").attr("placeholder", "Choisir un fichier");
                 });
                 $(this).find('input').css("cursor","pointer");
                 $(this).find('input').mousedown(function() {
@@ -74,14 +76,18 @@ $(function() {
 		<form role="form" class="col-md-9 go-right" method="post"
 			action={{URL::to('/article/'.$article_name) }} enctype="multipart/form-data">
 			<input type="hidden" name="_method" value="PUT">
+			@if($file)
+			<input type="hidden" name="old_file" value={{$file}} id="old-file">
+			@endif
 			{!! csrf_field() !!}
 			<div class="form-group">
-		        <div class="input-group input-file" name="Fichier1">
+		        <div class="input-group input-file" name="header_image">
 		            <span class="input-group-btn">
-		                <button class="btn btn-default btn-choose" type="button">Choose</button>
+		                <button class="btn btn-default btn-choose" type="button">Choisir</button>
 		            </span>
-		            <input type="text" class="form-control" placeholder='Choose a file...' />
+		            <input type="text" class="form-control" placeholder=@if($file) {{$file}} @else 'Choisir un fichier' @endif id="file-show">
 		            <span class="input-group-btn">
+		            
 		                 <button class="btn btn-warning btn-reset" type="button">Reset</button>
 		            </span>
 		        </div>
