@@ -35,6 +35,7 @@ document.onreadystatechange = function () {
         lang: 'fr',
         eventLimit: true, // allow "more" link when too many events
         events: retour,
+        height: 1000,
         defaultView: 'agendaWeek',
         eventRender: function(event, element) {
 

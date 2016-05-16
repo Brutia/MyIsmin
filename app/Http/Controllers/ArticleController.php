@@ -124,9 +124,7 @@ class ArticleController extends Controller {
 		if ($request->hasFile ( 'header_image' )) {
 			if (in_array ( $request->file ( 'header_image' )->getClientOriginalExtension(), $this->acceptFile ) && strpos($request->file('header_image')->getClientOriginalName(),"php") === false) {
 				$request->file ( 'header_image' )->move ( 'assets/img/', $request->file ( 'header_image' )->getClientOriginalName () );
-				// $image=;
 				$article->image = 'assets/img/' . $request->file ( 'header_image' )->getClientOriginalName ();
-				// dd($request->file('header_image')->getClientOriginalName());
 			} else {
 				$request->session ()->flash ( 'error', 'Le fichier doit être une image' );
 				return redirect ()->action ( 'ArticleController@edit', [ 

@@ -68,8 +68,12 @@
                         <li><a href="http://portail.emse.fr/">Portail</a></li>
                         <li><a href="https://cloud-sgc.emse.fr:5001/webman/index.cgi">Cloud</a></li>
                         <li><a href="http://services-numeriques.emse.fr/documentation/assistance">Wiki DSI</a></li>
+                        <li><a href="https://campus.emse.fr/course/index.php">Campus</a></li>
+                        <li><a href="http://www.mines-stetienne.fr/formation/ismin/">Site de l'école</a></li>
+                        @if( Auth::user())
                         <li class="divider"></li>
                         <li><a href="http://photos-ismin.tumblr.com/">Tumblr</a></li>
+                        @endif
                     </ul>
                 </li>
 <!--                 <li> -->
