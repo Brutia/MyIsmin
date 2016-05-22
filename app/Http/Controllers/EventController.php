@@ -16,14 +16,14 @@ class EventController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$events = Evenement::where ( 'start', '>', (new \DateTime ()) )->get ();
+		$events = Evenement::where ( 'start', '>', (new \DateTime ('yesterday')) )->get ();
 		// dd($events[0]->);
 		return view ( 'evenements.index', [ 
 				'events' => $events 
 		] );
 	}
 	public function getall() {
-		$events = Evenement::with ( 'lieu' )->where ( 'start', '>', (new \DateTime ()) )->get ();
+		$events = Evenement::with ( 'lieu' )->where ( 'start', '>', (new \DateTime ('first day of')) )->get ();
 		return $events->toJson ();
 	}
 	

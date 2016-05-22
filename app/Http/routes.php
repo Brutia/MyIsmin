@@ -13,7 +13,7 @@
 Route::get ( '/', function () {
 	return view ( 'pages.welcome', [ 
 			'banner' => null,
-			'content_header' => 'Le site des élèves Ismin' 
+			'content_header' => 'The website all ISMIN must use !' 
 	] );
 } );
 
