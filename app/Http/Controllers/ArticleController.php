@@ -31,8 +31,13 @@ class ArticleController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create() {
-		//
+	public function create(Request $request) {
+		return view('article.admin.add' ,[
+				'error'=>$request->session ()->pull ( 'error', ' '),
+				'name'=>$request->session ()->pull ( 'name', ' '),
+				'content'=>$request->session ()->pull ( 'content', " "),
+				'header_text'=>$request->session ()->pull ( 'header_text', ' '),
+		]);
 	}
 	
 	/**
@@ -42,7 +47,27 @@ class ArticleController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
-		//
+		$article = new Article();
+		$article->name = $request->input ( 'name' );
+		$article->lien = str_replace(' ', '-',strtolower (urldecode($request->input ( 'name' ))));
+		$article->content = $request->input ( 'contenu' );
+		$article->header_text = $request->input('header');
+		if ($request->hasFile ( 'header_image' )) {
+			if (in_array ( $request->file ( 'header_image' )->getClientOriginalExtension(), $this->acceptFile ) && strpos($request->file('header_image')->getClientOriginalName(),"php") === false) {
+				$request->file ( 'header_image' )->move ( 'assets/img/', $request->file ( 'header_image' )->getClientOriginalName () );
+				$article->image = 'assets/img/' . $request->file ( 'header_image' )->getClientOriginalName ();
+			} else {
+				$request->session ()->flash ( 'error', 'Le fichier doit être une image' );
+				$request->session ()->flash ( 'name', $article->name );
+				$request->session ()->flash ( 'content', $article->content );
+				$request->session ()->flash ( 'header_text', $article->header_text );
+				return redirect ()->action ( 'ArticleController@add' );
+			}
+		}
+		
+		$article->save ();
+		
+		return redirect ()->action ( 'ArticleController@index');
 	}
 	
 	/**
@@ -149,6 +174,9 @@ class ArticleController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id) {
-		//
+		$article = Article::find($id);
+		
+		$article->delete();
+		return redirect()->action("ArticleController@index");
 	}
 }

@@ -59,9 +59,6 @@ Route::group ( [
 	Route::resource ( 'user', 'UserController' );
 	Route::resource ( 'article', 'ArticleController', [
 			'except' => [
-					'create',
-					'store',
-					'destroy',
 					'show',
 					'edit',
 					'update'
