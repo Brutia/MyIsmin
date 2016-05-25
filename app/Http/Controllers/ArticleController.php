@@ -76,8 +76,8 @@ class ArticleController extends Controller {
 	 * @param int $id        	
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($article_name) {
-		$article = DB::table ( 'articles' )->where ( 'name', $article_name )->first ();
+	public function show($id) {
+		$article = Article::find($id);
 		if($article == null){
 			return view('errors.503');
 		}
@@ -96,7 +96,8 @@ class ArticleController extends Controller {
 				'content' => $article->content,
 				'banner' => $banner,
 				'content_header' => $content_header,
-				'article_name' => $article_name 
+				'article_name' => $article->name,
+				'id'=> $article->id,
 		] );
 	}
 	
@@ -106,10 +107,10 @@ class ArticleController extends Controller {
 	 * @param int $id        	
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(Request $request, $article_name) {
+	public function edit(Request $request, $id) {
 		$errors = [];
 		$errors [] = $request->session ()->pull ( 'error', null );
-		$article = DB::table ( 'articles' )->where ( 'name', $article_name )->first ();
+		$article = Article::find($id);
 		if ($article->image != null) {
 			$banner = $article->image;
 			$file = explode("/",$banner);
@@ -128,9 +129,43 @@ class ArticleController extends Controller {
 				'content' => $article->content,
 				"banner" => $banner,
 				"content_header" => $content_header,
+				"article_name" => $article->name,
+				"file" => $file,
+				"errors" => $errors,
+				"id" => $article->id,
+		] );
+	}
+	
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function adminedit(Request $request, $article_name) {
+		$errors = [];
+		$errors [] = $request->session ()->pull ( 'error', null );
+		$article = DB::table ( 'articles' )->where ( 'name', $article_name )->first ();
+		if ($article->image != null) {
+			$banner = $article->image;
+			$file = explode("/",$banner);
+			$file = $file[count($file)-1];
+		} else {
+			$banner = null;
+			$file = null;
+		}
+	
+		if ($article->header_text != null) {
+			$content_header = $article->header_text;
+		} else {
+			$content_header = null;
+		}
+		return view ( 'article.edit', [
+				'content' => $article->content,
+				"banner" => $banner,
+				"content_header" => $content_header,
 				"article_name" => $article_name,
 				"file" => $file,
-				"errors" => $errors 
+				"errors" => $errors
 		] );
 	}
 	
@@ -141,8 +176,8 @@ class ArticleController extends Controller {
 	 * @param int $id        	
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $article_name) {
-		$article = Article::where ( 'name', $article_name )->first ();
+	public function update(Request $request, $id) {
+		$article = Article::find($id);
 		
 		$article->content = $request->input ( 'contenu' );
 		$article->header_text = $request->input('header');
@@ -153,7 +188,7 @@ class ArticleController extends Controller {
 			} else {
 				$request->session ()->flash ( 'error', 'Le fichier doit être une image' );
 				return redirect ()->action ( 'ArticleController@edit', [ 
-						$article_name 
+						$id 
 				] );
 			}
 		}
@@ -163,7 +198,7 @@ class ArticleController extends Controller {
 		$article->save ();
 		
 		return redirect ()->action ( 'ArticleController@show', [ 
-				$article_name 
+				$id 
 		] );
 	}
 	

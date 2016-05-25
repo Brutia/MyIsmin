@@ -64,6 +64,8 @@ Route::group ( [
 					'update'
 			]
 	] );
+	Route::get('/article/{article}/edit','ArticleController@adminedit');
+	Route::resource('asso', 'AssoController');
 } );
 
 

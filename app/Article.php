@@ -11,6 +11,14 @@ class Article extends Model
 		return $this->belongsTo('App\User');
 	}
 	
+	public function assos(){
+		return $this->hasMany('App\Assos');
+	}
+	
+	public function clubs(){
+		return $this->hasMany('App\Clubs');
+	}
+	
 	
 	
 }

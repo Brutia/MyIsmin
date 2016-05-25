@@ -21,10 +21,8 @@ class ComposerServiceProvider extends ServiceProvider
 
 		// Using Closure based composers...
 		view()->composer('common.*', function ($view) {
-			$clubsNames = new Clubs();
-			$clubsNames = $clubsNames->getClubsNames();
-			$assosNames = new Assos();
-			$assosNames = $assosNames->getAssos();
+			$clubsNames = Clubs::all();
+			$assosNames = Assos::all();
 			view()->share('clubs', $clubsNames);
 			view()->share('assos', $assosNames);
 		});
