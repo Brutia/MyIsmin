@@ -7,7 +7,7 @@ Calendrier
 
 @section('content')
 
-<script type="text/javascript" src="{{URL::to('assets/js/dateformat.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('assets/js/dateformat.js')}}"></script>
 <script>
 var test;
 document.onreadystatechange = function () {
@@ -26,12 +26,11 @@ document.onreadystatechange = function () {
                     start: e.start,
                     end  : e.end,
                     description: e.description,
-                    lieu: e.lieu
+                    lieu: e.lieu.name
                 });
             });
         }
     });
-    console.log(retour);
     $('#calendar').fullCalendar({
         lang: 'fr',
         eventLimit: true, // allow "more" link when too many events

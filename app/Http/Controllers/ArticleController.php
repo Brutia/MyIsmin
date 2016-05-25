@@ -21,7 +21,9 @@ class ArticleController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		//
+		$articles = Article::all();
+		
+		return view('article.admin.index',['articles'=>$articles]);
 	}
 	
 	/**
@@ -85,8 +87,11 @@ class ArticleController extends Controller {
 		$article = DB::table ( 'articles' )->where ( 'name', $article_name )->first ();
 		if ($article->image != null) {
 			$banner = $article->image;
+			$file = explode("/",$banner);
+			$file = $file[count($file)-1];
 		} else {
 			$banner = null;
+			$file = null;
 		}
 		
 		if ($article->header_text != null) {
@@ -94,12 +99,12 @@ class ArticleController extends Controller {
 		} else {
 			$content_header = null;
 		}
-		
 		return view ( 'article.edit', [ 
 				'content' => $article->content,
 				"banner" => $banner,
 				"content_header" => $content_header,
 				"article_name" => $article_name,
+				"file" => $file,
 				"errors" => $errors 
 		] );
 	}
@@ -119,15 +124,16 @@ class ArticleController extends Controller {
 		if ($request->hasFile ( 'header_image' )) {
 			if (in_array ( $request->file ( 'header_image' )->getClientOriginalExtension(), $this->acceptFile ) && strpos($request->file('header_image')->getClientOriginalName(),"php") === false) {
 				$request->file ( 'header_image' )->move ( 'assets/img/', $request->file ( 'header_image' )->getClientOriginalName () );
-				// $image=;
 				$article->image = 'assets/img/' . $request->file ( 'header_image' )->getClientOriginalName ();
-				// dd($request->file('header_image')->getClientOriginalName());
 			} else {
 				$request->session ()->flash ( 'error', 'Le fichier doit être une image' );
 				return redirect ()->action ( 'ArticleController@edit', [ 
 						$article_name 
 				] );
 			}
+		}
+		if(!$request->input('old_file') && !$request->hasFile ( 'header_image' )){
+			$article->image = "";
 		}
 		$article->save ();
 		

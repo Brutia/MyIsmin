@@ -1,0 +1,19 @@
+<<<<<<< HEAD
+/vendor
+/node_modules
+/public/storage
+Homestead.yaml
+Homestead.json
+.env
+/composer.lock
+/composer.phar
+=======
+/vendor
+/node_modules
+/public/storage
+Homestead.yaml
+Homestead.json
+.env
+/composer.lock
+/composer.phar
+>>>>>>> af0b89bf2c7e693ae83dc83cedf14ab76dbb2ecb

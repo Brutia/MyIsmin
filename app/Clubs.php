@@ -25,6 +25,6 @@ class Clubs extends Model
 	}
 	
     public function getClubsNames() {
-    	return DB::table('clubs')->select('lien')->get();
+    	return DB::table('clubs')->select('lien','name')->get();
     }
 }

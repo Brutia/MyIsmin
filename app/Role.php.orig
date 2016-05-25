@@ -1,0 +1,22 @@
+<<<<<<< HEAD
+<?php
+
+namespace App;
+
+
+use Zizaco\Entrust\EntrustRole;
+
+class Role extends EntrustRole {
+	
+=======
+<?php
+
+namespace App;
+
+
+use Zizaco\Entrust\EntrustRole;
+
+class Role extends EntrustRole {
+	
+>>>>>>> af0b89bf2c7e693ae83dc83cedf14ab76dbb2ecb
+}

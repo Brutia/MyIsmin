@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('roles')->insert([
+        		
+        		[
+        				'name'=>'admin',
+        				'display_name'=>'Administrateur du site',
+<<<<<<< HEAD
+        				'description'=>'A tous les droits'
+=======
+        				'description'=>'A tous les droits'
+>>>>>>> af0b89bf2c7e693ae83dc83cedf14ab76dbb2ecb
+        		],
+        		[
+        				'name'=>'user',
+        				'display_name'=>'Utilisateur du site',
+<<<<<<< HEAD
+        				'description'=>'Peut demander à réserver la salle'
+=======
+        				'description'=>'Peut demander à réserver la salle'
+>>>>>>> af0b89bf2c7e693ae83dc83cedf14ab76dbb2ecb
+        		]]
+        );
+    }
+}

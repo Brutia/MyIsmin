@@ -1,0 +1,42 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
+
+class CreateAssosTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        //
+    	Schema::create('assos', function (Blueprint $table) {
+    		$table->increments('id');
+    		$table->string('name',60);
+<<<<<<< HEAD
+=======
+    		$table->string('lien');
+>>>>>>> af0b89bf2c7e693ae83dc83cedf14ab76dbb2ecb
+    		$table->integer('user_id')->index();
+//     		$table->integer('')
+    	});
+    	
+//     	Schema::table('assos', function ($table){
+//     		$table->integer('article')
+//     	}
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('assos');
+    }
+}

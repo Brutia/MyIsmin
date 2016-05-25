@@ -1,0 +1,38 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+class Assos extends Model
+{
+    
+	/**
+	 * 
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function user(){
+		return $this->belongsTo('App\User');
+	}
+	
+	/**
+	 * 
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function articles(){
+		return $this->hasMany('App\Article');
+	}
+	
+	public function getAssos(){
+// 		$assos = [];
+<<<<<<< HEAD
+		return DB::table('assos')->select('lien')->get();
+=======
+
+		
+		return DB::table('assos')->select('lien','name')->get();
+>>>>>>> af0b89bf2c7e693ae83dc83cedf14ab76dbb2ecb
+	}
+	
+}

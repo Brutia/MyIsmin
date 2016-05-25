@@ -19,6 +19,7 @@ class CreateArticlesTable extends Migration
             $table->longText('content');
             $table->string('name')->unique();
             $table->string('header_text');
+            $table->string('lien');
         });
     }
 
