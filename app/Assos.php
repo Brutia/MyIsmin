@@ -20,15 +20,10 @@ class Assos extends Model
 	 * 
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function articles(){
-		return $this->hasMany('App\Article');
+	public function article(){
+		return $this->belongsTo('App\Article');
 	}
 	
-	public function getAssos(){
-// 		$assos = [];
-
-		
-		return DB::table('assos')->select('lien','name')->get();
-	}
+	
 	
 }

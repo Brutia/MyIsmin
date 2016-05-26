@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClubsTable extends Migration
+class Update extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,12 @@ class CreateClubsTable extends Migration
      */
     public function up()
     {
-    	Schema::create('clubs', function (Blueprint $table) {
-    		$table->increments('id');
-    		$table->string('lien');
-    		$table->string('name',60);
-    		$table->integer('user_id')->index();
-    		$table->integer('article_id')->index();
-    		//     		$table->integer('')
-    	});
+        Schema::table('clubs', function($table){
+        	$table->integer('article_id')->index();
+        });
+        	Schema::table('assos', function($table){
+        		$table->integer('article_id')->index();
+        	});
     }
 
     /**

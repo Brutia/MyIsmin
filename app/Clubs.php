@@ -20,11 +20,9 @@ class Clubs extends Model
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function articles(){
-		return $this->hasMany('App\Article');
+	public function article(){
+		return $this->belongsTo('App\Article');
 	}
 	
-    public function getClubsNames() {
-    	return DB::table('clubs')->select('lien','name')->get();
-    }
+    
 }

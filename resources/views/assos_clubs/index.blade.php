@@ -21,11 +21,11 @@
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col col-xs-6">
-							<h3 class="panel-title">Liste des articles</h3>
+							<h3 class="panel-title">Liste des {{$type}}</h3>
 						</div>
 						<div class="col col-xs-6 text-right">
 							<a href={{URL::to('/admin/article/create')}}><button type="button"
-									class="btn btn-sm btn-primary btn-create">Ajouter un article</button></a>
+									class="btn btn-sm btn-primary btn-create">Ajouter un {{$type}}</button></a>
 						</div>
 					</div>
 				</div>
@@ -37,24 +37,22 @@
 								<th><em class="fa fa-cog"></em></th>
 								<th class="hidden-xs">ID</th>
 								<th>Nom</th>
-								<th>lien</th>
-								<th>Texte d'en tête</th>
-								<th>image</th>
+								<th>Article</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($articles as $article)
+							@foreach($assos as $asso)
 							<tr>
 								<td>
 									<div class="row">
 										<div class="col-md-10">
 											<div class="col-md-5">
-												<a href="#"
+												<a href="{{URL::to('/admin/asso/'.$asso->id.'/edit')}}"
 													class="btn btn-default"><em class="fa fa-pencil"></em></a>
 											</div>
 											<div class="col-md-5 col-md-offset-1">
 												<form method="post" class=""
-													action="{{URL::to('/admin/article/'.$article->id)}}">
+													action="{{URL::to('/admin/asso/'.$asso->id)}}">
 													<div class="">
 														<input type="hidden" name="_method" value="DELETE"> {!!
 														csrf_field() !!}
@@ -66,35 +64,16 @@
 										</div>
 									</div>
 								</td>
-								<td class="hidden-xs">{{$article->id}}</td>
-								<td>{{$article->name}}</td>
-								<td>{{$article->lien}}</td>
-								<td>{{$article->header_text}}</td>
-								<td>{{$article->image}}</td>
+								<td class="hidden-xs">{{$asso->id}}</td>
+								<td>{{$asso->name}}</td>
+								<td>{{$asso->article->name}}</td>
 							</tr>
 							@endforeach
 						</tbody>
 					</table>
 
 				</div>
-				<!-- 				<div class="panel-footer"> -->
-				<!-- 					<div class="row"> -->
-				<!-- 						<div class="col col-xs-4">Page 1 of 5</div> -->
-				<!-- 						<div class="col col-xs-8"> -->
-				<!-- 							<ul class="pagination hidden-xs pull-right"> -->
-				<!-- 								<li><a href="#">1</a></li> -->
-				<!-- 								<li><a href="#">2</a></li> -->
-				<!-- 								<li><a href="#">3</a></li> -->
-				<!-- 								<li><a href="#">4</a></li> -->
-				<!-- 								<li><a href="#">5</a></li> -->
-				<!-- 							</ul> -->
-				<!-- 							<ul class="pagination visible-xs pull-right"> -->
-				<!-- 								<li><a href="#">«</a></li> -->
-				<!-- 								<li><a href="#">»</a></li> -->
-				<!-- 							</ul> -->
-				<!-- 						</div> -->
-				<!-- 					</div> -->
-				<!-- 				</div> -->
+				
 			</div>
 
 		</div>

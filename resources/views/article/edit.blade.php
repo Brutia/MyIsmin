@@ -58,6 +58,13 @@ $(function() {
     bs_input_file();
 });
 </script>
+
+@section('title')
+
+{{$article_name}}
+
+@endsection
+
 @section('content')
 
 <div class="container">
@@ -74,7 +81,7 @@ $(function() {
 		@endif
 	
 		<form role="form" class="col-md-9 go-right" method="post"
-			action={{URL::to('/article/'.$article_name) }} enctype="multipart/form-data">
+			action={{URL::to('/article/'.$id) }} enctype="multipart/form-data">
 			<input type="hidden" name="_method" value="PUT">
 			@if($file)
 			<input type="hidden" name="old_file" value={{$file}} id="old-file">

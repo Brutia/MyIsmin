@@ -13,7 +13,7 @@
 Route::get ( '/', function () {
 	return view ( 'pages.welcome', [ 
 			'banner' => null,
-			'content_header' => 'Le site des élèves Ismin' 
+			'content_header' => 'The website all ISMIN must use !' 
 	] );
 } );
 
@@ -59,14 +59,13 @@ Route::group ( [
 	Route::resource ( 'user', 'UserController' );
 	Route::resource ( 'article', 'ArticleController', [
 			'except' => [
-					'create',
-					'store',
-					'destroy',
 					'show',
 					'edit',
 					'update'
 			]
 	] );
+	Route::get('/article/{article}/edit','ArticleController@adminedit');
+	Route::resource('asso', 'AssoController');
 } );
 
 
