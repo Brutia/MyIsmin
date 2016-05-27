@@ -38,6 +38,7 @@ tinymce.init({
   font_size_style_values : "10px,12px,13px,14px,16px,18px,20px",
   language: "fr_FR",
   relative_urls: false,	
+  images_upload_base_path: '/some/basepath'
 });
 
 
