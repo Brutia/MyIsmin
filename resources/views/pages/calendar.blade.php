@@ -21,10 +21,16 @@ document.onreadystatechange = function () {
         'dataType': "json",
         'success': function (data) {
             $.each(data,function(i, e){
+                if(e.assos){
+                    var asso_name = e.assos.name;
+                }else{
+                    var asso_name = "Autre";
+                }
                 retour.push({
                     title: e.title,
                     start: e.start,
                     end  : e.end,
+                    orga : asso_name,
                     description: e.description,
                     lieu: e.lieu.name
                 });
@@ -41,6 +47,7 @@ document.onreadystatechange = function () {
 
             element.append("<br/>Description: " + event.description);
             element.append("<br/><br/>Lieu: "+ event.lieu);
+            element.append("<br/>Organisateur: " + event.orga);
         }
     });
 };

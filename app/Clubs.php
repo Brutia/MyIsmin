@@ -24,5 +24,9 @@ class Clubs extends Model
 		return $this->belongsTo('App\Article');
 	}
 	
+	public function events(){
+		return $this->hasMany('App\Event');
+	}
+	
     
 }

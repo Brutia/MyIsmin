@@ -24,7 +24,7 @@
 							<h3 class="panel-title">Liste des {{$type}}</h3>
 						</div>
 						<div class="col col-xs-6 text-right">
-							<a href={{URL::to('/admin/article/create')}}><button type="button"
+							<a href={{URL::to('/admin/asso/create')}}><button type="button"
 									class="btn btn-sm btn-primary btn-create">Ajouter un {{$type}}</button></a>
 						</div>
 					</div>
@@ -47,12 +47,12 @@
 									<div class="row">
 										<div class="col-md-10">
 											<div class="col-md-5">
-												<a href="{{URL::to('/admin/asso/'.$asso->id.'/edit')}}"
+												<a href="{{URL::to('/admin/'.$type.'/'.$asso->id.'/edit')}}"
 													class="btn btn-default"><em class="fa fa-pencil"></em></a>
 											</div>
 											<div class="col-md-5 col-md-offset-1">
 												<form method="post" class=""
-													action="{{URL::to('/admin/asso/'.$asso->id)}}">
+													action="{{URL::to('/admin/'.$type.'/'.$asso->id)}}">
 													<div class="">
 														<input type="hidden" name="_method" value="DELETE"> {!!
 														csrf_field() !!}

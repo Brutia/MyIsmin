@@ -37,6 +37,8 @@ class ArticleController extends Controller {
 				'name'=>$request->session ()->pull ( 'name', ' '),
 				'content'=>$request->session ()->pull ( 'content', " "),
 				'header_text'=>$request->session ()->pull ( 'header_text', ' '),
+				'file'=>'',
+				'banner'=>'',
 		]);
 	}
 	
@@ -141,10 +143,10 @@ class ArticleController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function adminedit(Request $request, $article_name) {
+	public function adminedit(Request $request, $id) {
 		$errors = [];
 		$errors [] = $request->session ()->pull ( 'error', null );
-		$article = DB::table ( 'articles' )->where ( 'name', $article_name )->first ();
+		$article = Article::find($id);
 		if ($article->image != null) {
 			$banner = $article->image;
 			$file = explode("/",$banner);
@@ -159,13 +161,14 @@ class ArticleController extends Controller {
 		} else {
 			$content_header = null;
 		}
-		return view ( 'article.edit', [
+		return view ( 'article.admin.edit', [
 				'content' => $article->content,
 				"banner" => $banner,
-				"content_header" => $content_header,
-				"article_name" => $article_name,
+				"header_text" => $content_header,
+				"name" => $article->name,
 				"file" => $file,
-				"errors" => $errors
+				"error" => $errors,
+				"id" => $article->id,
 		] );
 	}
 	
@@ -196,10 +199,14 @@ class ArticleController extends Controller {
 			$article->image = "";
 		}
 		$article->save ();
+		if($request->input('admin') == "true"){
+			return redirect()->action('ArticleController@index');
+		}else{
+			return redirect ()->action ( 'ArticleController@show', [
+					$id
+			] );
+		}
 		
-		return redirect ()->action ( 'ArticleController@show', [ 
-				$id 
-		] );
 	}
 	
 	/**

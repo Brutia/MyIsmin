@@ -4,6 +4,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Clubs;
 use App\Assos;
+use App\Page;
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -23,8 +24,11 @@ class ComposerServiceProvider extends ServiceProvider
 		view()->composer('common.*', function ($view) {
 			$clubsNames = Clubs::all();
 			$assosNames = Assos::all();
+			$pages = Page::with('article')->where('enabled','=','1')->get();//;
+// 			dd($pages[0]);
 			view()->share('clubs', $clubsNames);
 			view()->share('assos', $assosNames);
+			view()->share('pages', $pages);
 		});
 	}
 

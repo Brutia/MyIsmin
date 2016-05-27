@@ -17,8 +17,10 @@ class CreateAssosTable extends Migration
     	Schema::create('assos', function (Blueprint $table) {
     		$table->increments('id');
     		$table->string('name',60);
+    		$table->timestamps();
     		$table->string('lien');
     		$table->integer('user_id')->index();
+    		$table->integer('article_id')->index();
 //     		$table->integer('')
     	});
     	

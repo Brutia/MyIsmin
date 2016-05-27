@@ -28,7 +28,8 @@ class AssoController extends Controller
      */
     public function create()
     {
-        //
+        $articles = Article::all();
+        return view('assos_clubs.add',["articles"=>$articles,"type"=>"asso","asso_name"=>"","article_s"=>""]);
     }
 
     /**
@@ -39,7 +40,15 @@ class AssoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $asso = new Assos();
+        $article = Article::find($request->input('article_id'));
+        $asso->name = $request->input('name');
+        
+        $asso->article()->associate($article);
+        
+        $asso->save();
+        
+        return redirect()->action('AssoController@index');
     }
 
     /**
@@ -63,7 +72,7 @@ class AssoController extends Controller
     {
         $articles = Article::all();
         $asso = Assos::find($id);
-        return view('assos_clubs.edit',['type' => 'asso','asso'=>$asso, 'articles'=>$articles, 'article_s' => $asso->article->id, 'errors' => [""]]);
+        return view('assos_clubs.edit',['type' => 'asso','asso_name'=>$asso->name, 'articles'=>$articles, 'article_s' => $asso->article->id,"id"=>$asso->id, 'errors' => [""]]);
     }
 
     /**
@@ -75,7 +84,15 @@ class AssoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    	$article = Article::find($request->input('article_id'));
+    	$asso = Assos::find($id);
+    	$asso->name = $request->input('name');
+    	
+    	$asso->article()->associate($article);
+    	
+    	$asso->save();
+    	
+    	return redirect()->action('AssoController@index');
     }
 
     /**
@@ -86,6 +103,9 @@ class AssoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $asso = Assos::find($id);
+		
+		$asso->delete();
+		return redirect()->action("AssoController@index");
     }
 }

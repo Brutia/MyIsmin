@@ -65,7 +65,10 @@ Route::group ( [
 			]
 	] );
 	Route::get('/article/{article}/edit','ArticleController@adminedit');
+// 	Route::put('/article/{article}','ArticleController@adminupdate');
 	Route::resource('asso', 'AssoController');
+	Route::resource('club', 'ClubController');
+	Route::resource('page', 'PageController');
 } );
 
 
