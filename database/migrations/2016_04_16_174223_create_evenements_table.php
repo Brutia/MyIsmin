@@ -20,6 +20,8 @@ class CreateEvenementsTable extends Migration
             $table->dateTime("start");
             $table->dateTime("end");
             $table->integer('user_id')->index();
+            $table->integer('assos_id')->index();
+            $table->integer('clubs_id')->index();
             $table->timestamps();
         });
     }

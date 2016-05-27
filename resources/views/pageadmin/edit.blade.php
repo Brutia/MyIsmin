@@ -5,11 +5,11 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<form role="form" class="col-md-12 go-right" method="post"
-			action={{URL::to('/admin/'.$type.'/'.$id) }} >
-				<input type="hidden" name="_method" value="PUT">
+			action={{URL::to('/admin/page') }} >
 				{!! csrf_field() !!}
-				<h2>Edition {{$type}}</h2>
-				@include('assos_clubs.formasso_club')
+				<input type="hidden" name="_method" value="PUT">
+				<h2>Edition de la page</h2>
+				@include('pageadmin.formpage')
 	
 			</form>
 		</div>
@@ -26,5 +26,3 @@
 <script type="text/javascript"
 	src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/jquery-ui.min.js')}}"></script>
-
-

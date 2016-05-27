@@ -7,60 +7,7 @@
 				<input type="hidden" name="_method" value="PUT"> {!! csrf_field()
 				!!}
 				<h2>Editer l'évènement</h2>
-				@if(count($errors))
-				<div class="row">
-				<div class="alert alert-danger col-md-12 go-right" role="alert">
-					@foreach($errors as $error) <span
-						class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-					<span class="sr-only">Error:</span> {{$error}} 
-					</br>
-					@endforeach
-				</div>
-				</div>
-
-				@endif
-				</br>
-				<div class="form-group">
-					<label for="title">Nom de l'évènement</label> <input name="title"
-						type="text" class="form-control" value={{$title}} required>
-
-				</div>
-				<div class="form-group">
-
-					<label for="description">Description</label>
-					<textarea name="description" class="form-control" required>{{$desc}}</textarea>
-				</div>
-				<div class="form-group">
-
-					<label for="lieu">Lieu</label> <select class="form-control"
-						id="lieu" name="lieu">
-						@foreach($lieus as $lieu)
-							<option value={{$lieu->id}} @if($lieu_s == $lieu->id) selected @endif >{{$lieu->name}}</option>
-						@endforeach
-					</select>
-				</div>
-				<div class="form-group">
-
-					<div class="row">
-						<div class='col-sm-12'>
-							<label for="start">Debut</label> <input name="start"
-								class="form-control" id='datetimepicker' value={{$start}} type="text" required>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-
-					<div class="row">
-						<div class='col-sm-12'>
-							<label for="end">Fin</label> <input name="end" class="form-control"
-								id='datetimepicker1' value={{$end}} type="text" required>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary">Enregistrer</button>
-				</div>
-
+				@include('evenements.event_form')
 			</form>
 		</div>
 	</div>
@@ -72,25 +19,14 @@
 	src="{{URL::asset('assets/js/jquery.js')}}"></script>
 <link rel="stylesheet" type="text/css"
 	href="{{URL::asset('assets/css/jquery-ui.css')}}">
-<script type="text/javascript"
-	src="{{URL::asset('assets/js/moment-with-locales.js')}}"></script>
-<script type="text/javascript"
-	src="{{URL::asset('assets/js/collapse.js')}}"></script>
-<script type="text/javascript"
-	src="{{URL::asset('assets/js/transition.js')}}"></script>
+
 <script type="text/javascript"
 	src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
-<script type="text/javascript"
-	src="{{URL::asset('assets/build/js/bootstrap-datetimepicker.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/jquery-ui.min.js')}}"></script>
 
 
 
 <script type="text/javascript">
-
-		
-
-		
 		$(function () {
             $('#datetimepicker').datetimepicker({
             	locale:'fr'

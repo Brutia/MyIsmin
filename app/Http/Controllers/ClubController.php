@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Article;
+use App\Clubs;
+
 
 class ClubController extends Controller
 {
@@ -15,8 +18,8 @@ class ClubController extends Controller
      */
     public function index()
     {
-        $assos = Assos::all();
-    	return view('assos_clubs.index',["assos"=>$assos, "type"=>"asso"]);
+    	$clubs = Clubs::all();
+    	return view('assos_clubs.index',["assos"=>$clubs, "type"=>"club"]);
     }
 
     /**
@@ -26,7 +29,8 @@ class ClubController extends Controller
      */
     public function create()
     {
-        //
+        $articles = Article::all();
+        return view('assos_clubs.add',["articles"=>$articles,"type"=>"club","asso_name"=>"","article_s"=>""]);
     }
 
     /**
@@ -37,7 +41,15 @@ class ClubController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $club = new Clubs();
+        $article = Article::find($request->input('article_id'));
+        $club->name = $request->input('name');
+        
+        $club->article()->associate($article);
+        
+        $club->save();
+        
+        return redirect()->action('AssoController@index');
     }
 
     /**
@@ -48,7 +60,7 @@ class ClubController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -59,10 +71,9 @@ class ClubController extends Controller
      */
     public function edit($id)
     {
-    	$articles = Article::all();
-    	$asso = Assos::find($id);
-    	return view('assos_clubs.edit',['type' => 'asso','asso'=>$asso, 'articles'=>$articles, 'article_s' => $asso->article->id, 'errors' => [""]]);
-    	
+        $articles = Article::all();
+        $club = Clubs::find($id);
+        return view('assos_clubs.edit',['type' => 'club','asso_name'=>$club->name, 'articles'=>$articles, 'article_s' => $club->article->id,"id"=>$club->id, 'errors' => [""]]);
     }
 
     /**
@@ -74,7 +85,15 @@ class ClubController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    	$article = Article::find($request->input('article_id'));
+    	$club = Clubs::find($id);
+    	$club->name = $request->input('name');
+    	 
+    	$club->article()->associate($article);
+    	 
+    	$club->save();
+    	 
+    	return redirect()->action('ClubController@index');
     }
 
     /**
@@ -85,6 +104,9 @@ class ClubController extends Controller
      */
     public function destroy($id)
     {
-        //
+    	$club = Clubs::find($id);
+    	
+    	$club->delete();
+    	return redirect()->action("ClubController@index");
     }
 }

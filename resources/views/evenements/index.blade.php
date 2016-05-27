@@ -35,6 +35,7 @@
 								<th><em class="fa fa-cog"></em></th>
 								<th class="hidden-xs">ID</th>
 								<th>Titre</th>
+								<th>Asso</th>
 								<th>Description</th>
 								<th>Lieu</th>
 								<th>Début</th>
@@ -64,7 +65,13 @@
 										</div>
 									</td>
 									<td class="hidden-xs">{{$event->id}}</td>
+									
 									<td>{{$event->title}}</td>
+									@if($event->assos)
+										<td>{{$event->assos->name}}</td>
+									@else
+										<td>Autre</td>
+									@endif
 									<td>{{$event->description}}</td>
 									<td>{{$event->lieu->name}}</td>
 									<td>{{$event->start}}</td>

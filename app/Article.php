@@ -19,6 +19,10 @@ class Article extends Model
 		return $this->hasMany('App\Clubs');
 	}
 	
+	public function pages(){
+		return $this->hasMany('App\Page');
+	}
+	
 	
 	
 }

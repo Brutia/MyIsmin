@@ -76,6 +76,11 @@
                         @endif
                     </ul>
                 </li>
+                @foreach($pages as $page)
+                	<li>
+                    	<a href={{ URL::to('article/'.$page->article->id) }}>{{$page->name}}</a>
+                	</li>
+                @endforeach
 <!--                 <li> -->
 <!--                     <a href="#">Innov'Action</a> -->
 <!--                 </li> -->
@@ -87,10 +92,13 @@
                         <li><a href="{{URL::to('/logout')}}">Se déconnecter</a></li>
                         @role('admin')
                         	<li><a href="{{URL::to('/admin/user')}}">Gestion des utilisateurs</a></li>
+                        	<li><a href="{{URL::to('/admin/article')}}">Gestion des articles</a></li>
+                        	<li><a href="{{URL::to('/admin/asso')}}">Gestion des assos</a>
+                        	<li><a href="{{URL::to('/admin/club')}}">Gestion des clubs</a>
+                        	<li><a href="{{URL::to('/admin/page')}}">Gestion des pages</a>
                         @endrole
                         @role('admin','prez')
                         	<li><a href="{{URL::to('/admin/event')}}">Calendrier</a></li>
-                        	<li><a href="{{URL::to('/admin/article')}}">Gestion des articles</a></li>
                         @endrole
                     </ul>
 				</li>
