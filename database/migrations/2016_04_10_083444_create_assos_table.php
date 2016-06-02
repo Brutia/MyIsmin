@@ -23,10 +23,6 @@ class CreateAssosTable extends Migration
     		$table->integer('article_id')->index();
 //     		$table->integer('')
     	});
-    	
-//     	Schema::table('assos', function ($table){
-//     		$table->integer('article')
-//     	}
     }
 
     /**
