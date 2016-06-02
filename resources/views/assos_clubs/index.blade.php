@@ -24,7 +24,7 @@
 							<h3 class="panel-title">Liste des {{$type}}</h3>
 						</div>
 						<div class="col col-xs-6 text-right">
-							<a href={{URL::to('/admin/asso/create')}}><button type="button"
+							<a href={{URL::to('/admin/'.$type.'/create')}}><button type="button"
 									class="btn btn-sm btn-primary btn-create">Ajouter un {{$type}}</button></a>
 						</div>
 					</div>
